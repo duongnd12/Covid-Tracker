@@ -3,7 +3,7 @@ import { Images } from "../constants/images";
 
 export default function Header() {
   return (
-    <div className="w-full bg-white flex justify-between shadow-md">
+    <div className="w-full bg-white flex justify-between shadow-md fixed top-0 mb-5">
       <div className="logo w-3/12">
         <img className="px-5" src={Images.Logo} alt="Logo" />
       </div>
@@ -16,17 +16,17 @@ export default function Header() {
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-red-400">
+            <a href="#aboutcovid" className="hover:text-red-400">
               Về Covid-19
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-red-400">
+            <a href="#trieuchung" className="hover:text-red-400">
               Các Triệu Chứng
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-red-400">
+            <a href="#saveyourself" className="hover:text-red-400">
               Bảo Vệ Bản Thân
             </a>
           </li>
@@ -36,7 +36,7 @@ export default function Header() {
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-red-400">
+            <a href="#inforcovid" className="hover:text-red-400">
               Thông Tin
             </a>
           </li>

@@ -29,6 +29,7 @@ const App = (props: Props) => {
 
   React.useEffect(() => {
     axios.get("https://covid19.mathdro.id/api").then((response) => {
+
       setConfirmed(response.data.confirmed.value);
       setRecovered(response.data.recovered.value);
       setDeath(response.data.deaths.value);
@@ -42,24 +43,25 @@ const App = (props: Props) => {
   }, []);
 
   React.useEffect(() => {
+
     if (country === "") return;
     axios
       .get(`https://covid19.mathdro.id/api/countries/${country}`)
       .then((response) => {
+        const confirmed = response.data.confirmed.value;
+        const recovered = response.data.recovered.value;
+        const deaths = response.data.deaths.value;
+
         setConfirmedDetail(response.data.confirmed.value);
         setRecoveredDetail(response.data.recovered.value);
         setDeathDetail(response.data.deaths.value);
       });
   }, [country]);
 
-  React.useEffect(() => {
-    console.log({ confirmed, recovered, deaths });
-  }, [confirmed, recovered, deaths]);
-
   if (!confirmed || !deaths) return <p>loading...........</p>;
 
   return (
-    <div>
+    <div className="pt-14">
       <Header />
       <Section1
         style="w-full flex p-20"
@@ -69,9 +71,9 @@ const App = (props: Props) => {
             chức Y tế Thế giới (WHO) công nhận là đại dịch vào ngày 11 tháng 3
             năm 2020."
       />
-      <div className="">
+      {/* <div className="">
         <Item img={Images.Stayhome} heading="Các vật dụng dính mầm bệnh" />
-      </div>
+      </div> */}
       <div className="flex-col bg-blue-50 py-10">
         <Heading
           style="font-bold text-2xl text-red-400 text-left pl-56"
@@ -96,7 +98,7 @@ const App = (props: Props) => {
             có cồn thường xuyên và không chạm vào da mặt."
         />
       </div>
-      <div className="py-10 w-full flex justify-center">
+      <div id="trieuchung" className="py-10 w-full flex justify-center">
         <Image img={Images.Stayhome} />
         <div className="w-6/12 p-5">
           <Text
@@ -135,7 +137,7 @@ const App = (props: Props) => {
           />
         </div>
       </div>
-      <div className="py-10 w-full">
+      <div id="saveyourself" className="py-10 w-full">
         <Text
           style="text-2xl text-blue-900 font-bold text-center"
           text="Thực hiện các bước để bảo vệ chính bạn"
@@ -199,26 +201,48 @@ const App = (props: Props) => {
           <Image img={Images.Stayhome} />
         </div>
       </div>
-      {/* <Card
-        tieude="Infected"
-        soCaNhiem={confirmed}
-        ngay="Sun Aug 08 2021"
-        footer="Number of active case of COVID19"
-      />
-      <Card
-        tieude="Infected"
-        soCaNhiem={recovered}
-        ngay="Sun Aug 08 2022"
-        footer="Number of active case of COVID19"
-      />
-      <Card
-        tieude="Infected"
-        soCaNhiem={deaths}
-        ngay="Sun Aug 08 2023"
-        footer="Number of active case of COVID19"
-      />
-      <Dropdown />
-      <Chart /> */}
+      <div id="inforcovid" className="inforcovid bg-blue-50">
+        <Text
+          style="text-red-500 px-24 py-2 text-2xl font-bold text-center"
+          text="Thông tin COVID-19 trên thế giới"
+        />
+        <div className="text-center py-8">
+          <p className="text-xl mb-2">Chọn Quốc gia</p>
+          <select
+            name=""
+            id=""
+            onChange={(e) => {
+              setCountry(e.target.value);
+            }}
+          >
+            <option value="--------">The gioi</option>
+            {countries.map((country) => {
+              return <option value={country}>{country}</option>;
+            })}
+          </select>
+        </div>
+        <div className="items flex items-center justify-around">
+          <Card
+            tieude="Số ca nhiễm"
+            soCaNhiem={confirmedDetail}
+            ngay="Sun Aug 08 2021"
+            footer="Number of active case of COVID19"
+          />
+          <Card
+            tieude="Số ca khỏi bệnh"
+            soCaNhiem={recoveredDetail}
+            ngay="Sun Aug 08 2022"
+            footer="Number of active case of COVID19"
+          />
+          <Card
+            tieude="Số ca tử vong"
+            soCaNhiem={deathsDetail}
+            ngay="Sun Aug 08 2023"
+            footer="Number of active case of COVID19"
+          />
+        </div>
+      </div>
+      <div className="footer">@copyright</div>
     </div>
   );
 };

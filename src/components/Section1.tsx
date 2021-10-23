@@ -11,7 +11,7 @@ interface Props {
 
 const Section1 = (props: Props) => {
   return (
-    <div className={props.style}>
+    <div id="aboutcovid" className={props.style}>
       <div className="w-5/12">
         <img src={Images.Stayhome} alt="Stayhome" className="w-full p-5" />
       </div>
@@ -19,9 +19,9 @@ const Section1 = (props: Props) => {
         <div className="text-left">
           <Heading style={props.style} heading={props.heading} />
           <Text style={props.style} text={props.text} />
-          {/* <a href="#" className="bg-red-300 text-white p-3 border rounded-3xl">
+          <a href="#" className="bg-red-300 text-white p-3 border rounded-3xl">
             Về Covid-19
-          </a> */}
+          </a>
         </div>
       </div>
     </div>
